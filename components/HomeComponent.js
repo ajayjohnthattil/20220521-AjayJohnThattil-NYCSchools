@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View , SafeAreaView, TouchableHighlight, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
+import TextAvatar from 'react-native-text-avatar';
 
 const HomeComponent = () => {
 
@@ -82,12 +83,12 @@ const HomeComponent = () => {
                     onHideUnderlay={separators.unhighlight}>
                     <View style={{flexDirection:'row'}}>
                         <View style={styles.icon}>
-                            <Icon
-                                style={ {textAlign: 'center'} }
-                                name='ios-bonfire-outline'
-                                size={ 70}
-                                color={ "#4F7942" }
-                            />
+                        <TextAvatar
+                          backgroundColor = {'#eee999'}
+                          textColor={'green'}
+                          size={80}
+                          type={'circle'} 
+                          >{item.school_name[0]}</TextAvatar>
                         </View>
                         <View style={styles.info}>
                             <Text ellipsizeMode='tail' numberOfLines={1} style={ styles.name }>{item.school_name}</Text>
@@ -154,8 +155,8 @@ export default HomeComponent;
 
 const styles= StyleSheet.create({
     icon:{
-      backgroundColor : '#eee999',
-      size            : 40,
+      //backgroundColor : '#eee999',
+      size            : 90,
       margin          : 15,
       width           : 80,
       height          : 80,
