@@ -75,7 +75,7 @@ const HomeComponent = () => {
                 <View>
                 <TouchableHighlight
                     style={{padding: 2, borderWidth: 0.2, borderColor:"#ECECEC"}}
-                    underlayColor="#DDDDDD"
+                    underlayColor="#fafafa"
                     key={item.key}
                     onPress={() => {showGrades(item);}}
                     onShowUnderlay={separators.highlight}
@@ -86,7 +86,7 @@ const HomeComponent = () => {
                                 style={ {textAlign: 'center'} }
                                 name='ios-bonfire-outline'
                                 size={ 70}
-                                color={ "green" }
+                                color={ "#4F7942" }
                             />
                         </View>
                         <View style={styles.info}>
@@ -99,40 +99,40 @@ const HomeComponent = () => {
                 </TouchableHighlight>
             
                 {activeTile===item.dbn && 
-                    <View style={{height:60,backgroundColor:"#4F7942", padding:5, alignContent:"center"}}>
-                        <View style={{flexDirection:'row', justifyContent:'center' , alignItems:"stretch", paddingRight:5}}>
+                    <View style={{flex:1,height:50,backgroundColor:'#e0e0e0'}}>
+                        <View style={{flexDirection:'row', paddingLeft:15, alignItems:'center'}}>
                         <Icon
                             style={styles.smallIcon}
                             name='book-outline'
                             size={30}
-                            color={ "red" }
+                            color={ "#757575" }
                         />
                         <Text style={styles.scoreText}>
                             {isGradeLoading?
                                 <ActivityIndicator/>
-                                :data2?.sat_critical_reading_avg_score }
+                                :data2?.sat_critical_reading_avg_score || '---' }
                         </Text>
                         <Icon
                             style={styles.smallIcon}
                             name='ios-bonfire-outline'
                             size={30}
-                            color={ "red" }
+                            color={ "#757575" }
                         />
                         <Text style={styles.scoreText}>
                             {isGradeLoading?
                                 <ActivityIndicator/>
-                                :data2?.sat_math_avg_score }
+                                :data2?.sat_math_avg_score || '---' }
                         </Text>
                         <Icon
                             style={styles.smallIcon}
                             name='reader-outline'
                             size={30}
-                            color={ "red" }
+                            color={ "#757575" }
                         />
                         <Text style={styles.scoreText}>
                             {isGradeLoading?
                                 <ActivityIndicator/>
-                                :data2?.sat_writing_avg_score }
+                                :data2?.sat_writing_avg_score || '---' }
                         </Text>
                         </View>
                     </View>
@@ -155,7 +155,6 @@ export default HomeComponent;
 const styles= StyleSheet.create({
     icon:{
       backgroundColor : '#eee999',
-      color           : '#F5F5F5',
       size            : 40,
       margin          : 15,
       width           : 80,
@@ -163,22 +162,21 @@ const styles= StyleSheet.create({
       borderRadius    : 40,
     },
     smallIcon:{
-        color           : '#F5F5F5',
-        textAlign       : 'center',
         margin          : 5,
+        marginTop       : 10,
         width           : 40,
         height          : 40,
         borderRadius    : 20,
       },
     scoreText:{
-        
-        fontSize        : 30,
+        alignItems      :'center',
+        fontSize        : 20,
         flex            : 1,
-        color           : "white",
+        color           : '#757575',
 
     },
     info:{
-      flex: 0.95,
+      flex: 0.9,
       justifyContent :'center',
       flexDirection  : 'column',
     },
@@ -195,6 +193,7 @@ const styles= StyleSheet.create({
       
     },
     location:{
+      color          :'#',
       justifyContent :'center',
       flexWrap       : 'wrap',
       fontSize       : 12,
