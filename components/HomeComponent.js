@@ -64,53 +64,93 @@ const HomeComponent = () => {
       
     }
     // component  JSX
-    
+
     return (
-      <View style={{ flex: 1, padding: 10}}>
+      <View style={{ flex: 1, padding: 10, justifyContent:'center'}}>
         {isLoading ? <ActivityIndicator/> : (
-          <FlatList
-          data={data}
-          extraData={data2}
-          renderItem={({ item, index, separators }) => (
-            <View>
-            <TouchableHighlight
-              style={{padding: 2, borderWidth: 0.2, borderColor:"#ECECEC"}}
-              underlayColor="#DDDDDD"
-              key={item.key}
-              onPress={() => {showGrades(item);}}
-              onShowUnderlay={separators.highlight}
-              onHideUnderlay={separators.unhighlight}>
-              <View style={{flexDirection:'row'}}>
-                <View style={styles.icon}>
-                <Icon
-                  style={ {textAlign: 'center'} }
-                  name='ios-bonfire-outline'
-                  size={ 70}
-                  color={ "green" }
-                />
-                </View>
-                <View style={styles.info}>
-                  <Text ellipsizeMode='tail' numberOfLines={1} style={ styles.name }>{item.school_name}</Text>
-                  <Text style={ styles.location}>{item.city}</Text>
-                </View>
+            <FlatList
+            data={data}
+            extraData={data2}
+            renderItem={({ item, index, separators }) => (
+                <View>
+                <TouchableHighlight
+                    style={{padding: 2, borderWidth: 0.2, borderColor:"#ECECEC"}}
+                    underlayColor="#DDDDDD"
+                    key={item.key}
+                    onPress={() => {showGrades(item);}}
+                    onShowUnderlay={separators.highlight}
+                    onHideUnderlay={separators.unhighlight}>
+                    <View style={{flexDirection:'row'}}>
+                        <View style={styles.icon}>
+                            <Icon
+                                style={ {textAlign: 'center'} }
+                                name='ios-bonfire-outline'
+                                size={ 70}
+                                color={ "green" }
+                            />
+                        </View>
+                        <View style={styles.info}>
+                            <Text ellipsizeMode='tail' numberOfLines={1} style={ styles.name }>{item.school_name}</Text>
+                            <Text style={ styles.location}>{item.city}</Text>
+                        </View>
                 
-              </View>
+                    </View>
               
-            </TouchableHighlight>
+                </TouchableHighlight>
             
-            
-            {activeTile===item.dbn && <View style={{height:100,backgroundColor:"green"}}><Text style={{fontSize:50}}>{isGradeLoading?<ActivityIndicator/>:data2?.sat_critical_reading_avg_score }</Text></View>}
-             
-           
-            </View>
-          )}
-          />
+                {activeTile===item.dbn && 
+                    <View style={{height:60,backgroundColor:"#4F7942", padding:5, alignContent:"center"}}>
+                        <View style={{flexDirection:'row', justifyContent:'center' , alignItems:"stretch", paddingRight:5}}>
+                        <Icon
+                            style={styles.smallIcon}
+                            name='book-outline'
+                            size={30}
+                            color={ "red" }
+                        />
+                        <Text style={styles.scoreText}>
+                            {isGradeLoading?
+                                <ActivityIndicator/>
+                                :data2?.sat_critical_reading_avg_score }
+                        </Text>
+                        <Icon
+                            style={styles.smallIcon}
+                            name='ios-bonfire-outline'
+                            size={30}
+                            color={ "red" }
+                        />
+                        <Text style={styles.scoreText}>
+                            {isGradeLoading?
+                                <ActivityIndicator/>
+                                :data2?.sat_math_avg_score }
+                        </Text>
+                        <Icon
+                            style={styles.smallIcon}
+                            name='reader-outline'
+                            size={30}
+                            color={ "red" }
+                        />
+                        <Text style={styles.scoreText}>
+                            {isGradeLoading?
+                                <ActivityIndicator/>
+                                :data2?.sat_writing_avg_score }
+                        </Text>
+                        </View>
+                    </View>
+                }
+                </View>
+            )}
+            />
         )}
       </View>
     );
 };
 
 export default HomeComponent;
+
+
+// CSS stylesheet code
+// ideally i would have liked to get all the inline CSS into this stylesheet
+// also overhaul the CSS styling in the whole
 
 const styles= StyleSheet.create({
     icon:{
@@ -121,9 +161,21 @@ const styles= StyleSheet.create({
       width           : 80,
       height          : 80,
       borderRadius    : 40,
-      withBackground  : true,
-      withBorder      : false,
-      
+    },
+    smallIcon:{
+        color           : '#F5F5F5',
+        textAlign       : 'center',
+        margin          : 5,
+        width           : 40,
+        height          : 40,
+        borderRadius    : 20,
+      },
+    scoreText:{
+        
+        fontSize        : 30,
+        flex            : 1,
+        color           : "white",
+
     },
     info:{
       flex: 0.95,
